@@ -1,6 +1,8 @@
-# Khutruke - StreamersAlert
+# Stone on fire
 
-StreamersAlert is a platform for Streamers from Nepal who are looking forward to grow their stream using tools and techniqies.
+Stone on fire is a platform from where, owner of a restaurant or cafe owner can connect with customers.
+
+And customers can make booking and can check what restaurant / Cafe has to offer.
 
 ### Build and Start the project
 
@@ -22,7 +24,7 @@ Add package name in `requirements.in` file.
 ```
 docker-compose exec app bash
 
-# Go to project rooot
+# Go to project root
 pip-compile requirements.in
 pip-sync requirements.in
 ```
