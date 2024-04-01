@@ -120,11 +120,11 @@ class Reservation(BaseModel):
             .only("reservation_time")
             .values_list("reservation_time")
         )
-        if t_reservations.exists():
+        if t_reservations:
             # Convert each datetime.time object in the list
-            not_available_time = [
+            not_available_time = {
                 convert_to_12_hour_format(time[0]) for time in t_reservations
-            ]
+            }
             return AVAILABLE_TIMESLOTS - not_available_time
 
         return AVAILABLE_TIMESLOTS

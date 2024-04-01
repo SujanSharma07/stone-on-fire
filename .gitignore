@@ -46,3 +46,5 @@ postgresql
 static
 mysql
 mediafiles
+staticfiles
+./script.py

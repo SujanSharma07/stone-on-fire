@@ -7,65 +7,22 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./app:/app
-      - ./logs/:/var/log/app/
+      - ./application:/app
     env_file:
       - ./.env
+    # ports:
+    #   - 8001:20001
   nginx:
     container_name: ${PROJECT_NAME}-nginx
     image: nginx:1.19.7
     restart: always
     volumes:
       - ./logs/:/var/log/nginx/
-      - ./app/static:/usr/src/app/staticfiles
-      - ./app/mediafiles:/usr/src/app/mediafiles
-      #- ./nginx/conf:/etc/nginx/conf.d
+      - ./application/assets:/usr/src/app/staticfiles
+      - ./application/mediafiles:/usr/src/app/mediafiles
+      - ./nginx/conf:/etc/nginx/conf.d
       #- ./nginx/ssl:/etc/nginx/ssl
     ports:
-      - 443:443
+      - 80:80
     depends_on:
       - app
-
-  redis:
-    image: redis
-    container_name: ${PROJECT_NAME}-redis
-    restart: always
-
-  celery:
-    image: "${PROJECT_NAME}:latest"
-    container_name: ${PROJECT_NAME}-celery
-    depends_on:
-      - redis
-    volumes:
-      - ./app:/app
-      - ./logs/:/var/log/app/
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-    command: celery -A config worker --loglevel=INFO -f /var/log/app/celery.log
-    env_file:
-      - ./.env
-
-  beat:
-    image: "${PROJECT_NAME}:latest"
-    container_name: ${PROJECT_NAME}-beat
-    depends_on:
-      - redis
-    volumes:
-      - ./app:/app
-      - ./logs/:/var/log/app/
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-    command: celery -A config beat --loglevel=INFO -f /var/log/app/celery.log
-    env_file:
-      - ./.env
-
-  #mysql:
-  #  image: mysql:latest
-  #  container_name: khutruke-mysql
-  #  environment:
-  #    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-  #    MYSQL_DATABASE: ${MYSQL_DATABASE}
-  #    MYSQL_USER: ${MYSQL_USER}
-  #    MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  #  volumes:
-  #    - ./mysql/data:/var/lib/mysql:rw
