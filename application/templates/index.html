@@ -33,12 +33,75 @@
 		/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-
 		<!-- 
     - custom css link
   -->
 		<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
+		<style>
+			/* Reset some common styles to avoid conflicts */
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+	
+			body {
+				font-family: sans-serif;
+			}
+	
+			/* Modal styles */
+			.modal {
+				display: none; /* Initially hidden */
+				position: fixed; /* Stay in place */
+				z-index: 9999; /* Ensure high z-index to override other elements */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+			}
+	
+			.modal-content {
+				margin: 5% auto; /* 15% from top and centered */
+				padding: 0px;
+				border: 1px solid #888;
+				width: 100%; 
+				height: 100%; /* Adjust width as needed */
+				background-color: white;
+				animation-name: zoom; /* Add zoom animation (optional) */
+				animation-duration: 0.6s;
+			}
+	
+			@keyframes zoom {
+				from {transform:scale(0)}
+				to {transform:scale(1)}
+			}
+	
+			/* Close button (x) */
+			.close {
+				color: #fff;
+				font-size: 30px;
+				font-weight: bold;
+				position: absolute;
+				top: 10px;
+				right: 15px;
+				cursor: pointer;
+			}
+	
+			.close:hover,
+			.close:focus {
+				color: red;
+				text-decoration: none;
+				cursor: pointer;
+			}
+	
+			/* PDF Iframe */
+			#pdfIframe {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
 		<!-- 
     - preload images
   -->
@@ -94,9 +157,7 @@
 
 					<span class="span">Breakfast 7.30 am - 2.30 pm</span>
 					<span class="span">Dinner 5 pm - 9 pm</span>
-
 				</div>
-
 
 				<a href="tel:+611234567890" class="topbar-item link">
 					<div class="icon">
@@ -117,8 +178,6 @@
 				</a>
 			</div>
 		</div>
-
-
 
 		<!-- 
     - #HEADER
@@ -201,7 +260,9 @@
 
 						<p class="body-4 navbar-text">Open: 9.30 am - 2.30pm</p>
 
-						<a href="mailto:booking@Stone on fire.com" class="body-4 sidebar-link"
+						<a
+							href="mailto:booking@Stone on fire.com"
+							class="body-4 sidebar-link"
 							>booking@Stone on fire.com</a
 						>
 
@@ -232,8 +293,6 @@
 
 				<div class="overlay" data-nav-toggler data-overlay></div>
 			</div>
-
-			
 		</header>
 
 		<main>
@@ -468,10 +527,11 @@
 												id="drinksimagecontainer"
 												class="img-cover"
 											/>
-											<iframe id="drinkspdf-viewer" style="display: none;"></iframe>
-
+											<iframe
+												id="drinkspdf-viewer"
+												style="display: none"
+											></iframe>
 										</figure>
-										
 									</a>
 
 									<div class="card-content">
@@ -479,9 +539,13 @@
 											<a href="#">Drinks</a>
 										</h3>
 
-										<button href="#" class="btn-text hover-underline label-2" id="drinks-menu-button"
-											>View Menu</button
+										<button
+											href="#"
+											class="btn-text hover-underline label-2"
+											id="drinks-menu-button"
 										>
+											View Menu
+										</button>
 									</div>
 								</div>
 							</li>
@@ -638,7 +702,7 @@
 								<span class="span body-1">$20.00</span>
 							</div>
 
-							<a href="#" class="btn btn-primary">
+							<a href="#menu" class="btn btn-primary">
 								<span class="text text-1">View All Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
@@ -679,9 +743,6 @@
 
 						<h2 class="headline-1 section-title text-center">Delicious Menu</h2>
 
-
-
-						
 						<ul class="grid-list">
 							<li>
 								<div class="menu-card hover:card">
@@ -891,15 +952,27 @@
 							<span class="span">9:00 pm</span>
 						</p>
 
-						<div id="pdfcontainer" name="menupdfviewer" style="display:none;">
-							<iframe id="pdfIframe" src="{% static 'full-menu.pdf' %}" width="100%" height="600px"></iframe>
-						</div>
+						{% comment %} Menu all {% endcomment %}
 
-						<button href="" class="btn btn-primary" id="openPdfBtn" >
+												<!-- Modal -->
+												<div id="pdfModal" class="modal" style="display:nonea">
+													<div class="modal-content">
+														<button class="close" id="closePdfBtn">&times;</button>
+														<iframe
+															id="pdfIframe"
+															src="{% static 'full-menu.pdf' %}"
+															width="100%"
+															height="100%"
+														></iframe>
+													</div>
+												</div>
+						<!-- Button to trigger the modal -->
+						<button class="btn btn-primary" id="openPdfBtn">
 							<span class="text text-1">View All Menu</span>
-
 							<span class="text text-2" aria-hidden="true">View All Menu</span>
 						</button>
+
+
 
 						<img
 							src="{% static 'images/shape-5.png' %}"
@@ -987,7 +1060,7 @@
 										name="name"
 										placeholder="Your Name"
 										autocomplete="off"
-										required=true
+										required="true"
 										class="input-field"
 									/>
 
@@ -996,8 +1069,7 @@
 										name="phone"
 										placeholder="Phone Number"
 										autocomplete="off"
-										required=true
-
+										required="true"
 										class="input-field"
 									/>
 								</div>
@@ -1031,9 +1103,8 @@
 
 										<input
 											type="date"
-											required=true
+											required="true"
 											id="reservation_date"
-
 											name="reservation_date"
 											class="input-field"
 										/>
@@ -1044,14 +1115,17 @@
 									<div class="icon-wrapper">
 										<ion-icon name="time-outline" aria-hidden="true"></ion-icon>
 
-										<select name="reservation_time" class="input-field" id="reservation_time" required>
+										<select
+											name="reservation_time"
+											class="input-field"
+											id="reservation_time"
+											required
+										>
 											<option value="">--- Select Time ---</option>
-
 										</select>
 
 										<ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
 									</div>
-
 								</div>
 
 								<textarea
@@ -1366,7 +1440,9 @@
 							472 bridge road, Richmond, Melbourne 23173, Australia
 						</address>
 
-						<a href="mailto:booking@Stone on fire.com" class="body-4 contact-link"
+						<a
+							href="mailto:booking@Stone on fire.com"
+							class="body-4 contact-link"
 							>booking@Stone on fire.com</a
 						>
 
@@ -1377,9 +1453,8 @@
 						<p class="body-4">Weekday : 07:30 am - 02:30 pm</p>
 						<p class="body-4">Weekends : 08:00 am - 03:00 pm</p>
 						<p class="body-4"><strong>Dinner</strong></p>
-							<p class="body-4">Weekday : 05:00 pm - 09:00 pm</p>
-							<p class="body-4">Weekends : 05:00 pm - 09:30 pm</p>
-
+						<p class="body-4">Weekday : 05:00 pm - 09:00 pm</p>
+						<p class="body-4">Weekends : 05:00 pm - 09:30 pm</p>
 
 						<div class="wrapper">
 							<div class="separator"></div>
@@ -1444,19 +1519,25 @@
 
 					<ul class="footer-list">
 						<li>
-							<a href="https://www.facebook.com/profile.php?id=61557589155256" class="label-2 footer-link hover-underline"
+							<a
+								href="https://www.facebook.com/profile.php?id=61557589155256"
+								class="label-2 footer-link hover-underline"
 								>Facebook</a
 							>
 						</li>
 
 						<li>
-							<a href="https://www.instagram.com/stoneonfire_2024/" class="label-2 footer-link hover-underline"
+							<a
+								href="https://www.instagram.com/stoneonfire_2024/"
+								class="label-2 footer-link hover-underline"
 								>Instagram</a
 							>
 						</li>
 
 						<li>
-							<a href="https://www.tiktok.com/@stone_on_fire_2024?_t=8l9wGg6qCp8&_r=1" class="label-2 footer-link hover-underline"
+							<a
+								href="https://www.tiktok.com/@stone_on_fire_2024?_t=8l9wGg6qCp8&_r=1"
+								class="label-2 footer-link hover-underline"
 								>Tiktok</a
 							>
 						</li>
@@ -1520,101 +1601,131 @@
 		></script>
 
 		<!-- Add this script in your HTML template -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const reservationForm = document.getElementById('reservation_form');
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const reservationForm = document.getElementById("reservation_form");
 
-        reservationForm.addEventListener('submit', function (event) {
-            event.preventDefault();
+				reservationForm.addEventListener("submit", function (event) {
+					event.preventDefault();
 
-            // Serialize form data
-            const formData = new FormData(reservationForm);
+					// Serialize form data
+					const formData = new FormData(reservationForm);
 
-            // Send form data to the Django backend using fetch
-            fetch('/reservation/', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json()) // Assuming your backend returns JSON
-            .then(data => {
-                // Handle the response data as needed
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
+					// Send form data to the Django backend using fetch
+					fetch("/reservation/", {
+						method: "POST",
+						body: formData,
+					})
+						.then((response) => response.json()) // Assuming your backend returns JSON
+						.then((data) => {
+							// Handle the response data as needed
+							console.log(data);
+						})
+						.catch((error) => {
+							console.error("Error:", error);
+						});
+				});
+			});
 
-	// Ajax code to provide available time dynamically
+			// Ajax code to provide available time dynamically
 
-	$(document).ready(function() {
-		$("#reservation_date").change(function() {
-		  var selectedDate = $(this).val();
-		  // Make an AJAX request to fetch available times for the selected date
-		  $.ajax({
-			url: "/reservations/available_times/", // Replace with your URL pattern
-			data: { "date": selectedDate },
-			dataType: "json",
-			success: function(data) {
-			  $("#reservation_time").empty(); // Clear existing options
-			  $("#reservation_time").append("<option value=''>--- Select Time ---</option>");
-			  for (var i = 0; i < data.length; i++) {
-				$("#reservation_time").append("<option value='" + data[i] + "'>" + data[i] + "</option>");
+			$(document).ready(function () {
+				$("#reservation_date").change(function () {
+					var selectedDate = $(this).val();
+					// Make an AJAX request to fetch available times for the selected date
+					$.ajax({
+						url: "/reservations/available_times/", // Replace with your URL pattern
+						data: { date: selectedDate },
+						dataType: "json",
+						success: function (data) {
+							$("#reservation_time").empty(); // Clear existing options
+							$("#reservation_time").append(
+								"<option value=''>--- Select Time ---</option>"
+							);
+							for (var i = 0; i < data.length; i++) {
+								$("#reservation_time").append(
+									"<option value='" + data[i] + "'>" + data[i] + "</option>"
+								);
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.error(
+								"Error fetching available times:",
+								textStatus,
+								errorThrown
+							);
+						},
+					});
+				});
+			});
+		</script>
+		{% comment %}
+		<script>
+			var isOpen = false;
+			document
+				.getElementById("openPdfBtn")
+				.addEventListener("click", function () {
+					if (isOpen) {
+						document.getElementById("pdfcontainer").style.display = "none";
+						document.getElementById("openPdfBtn").innerText = "View Menu";
+					} else {
+						var pdfSrc = "{% static 'full-menu.pdf' %}";
+						document.getElementById("pdfcontainer").style.display = "block";
+						document.getElementById("openPdfBtn").innerText = "Close Menu";
+					}
+					document.getElementById("pdfIframe").src = pdfSrc;
+
+					isOpen = !isOpen;
+				});
+		</script>
+		{% endcomment %} {% comment %}
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var isOpen = false;
+				var imageContainer = document.getElementById('drinksimagecontainer');
+				var pdfViewer = document.getElementById('drinkspdf-viewer');
+				var menuButton = document.getElementById('drinks-menu-button');
+
+				menuButton.addEventListener('click', function() {
+					if (isOpen) {
+						imageContainer.style.display = 'block';
+						pdfViewer.style.display = 'none';
+						menuButton.innerText = 'View Menu';
+					} else {
+						imageContainer.style.display = 'none';
+						pdfViewer.style.display = 'block';
+						menuButton.innerText = 'Close Menu';
+						// Replace 'YOUR_PDF_URL_HERE' with the URL of your PDF
+						pdfViewer.src = '{% static 'full-menu.pdf' %}';
+					}
+					isOpen = !isOpen;
+				});
+			});
+		</script>
+		{% endcomment %}
+		<script>
+			// Get the modal and button elements
+			var modal = document.getElementById("pdfModal");
+			var btn = document.getElementById("openPdfBtn");
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+			  modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			  modal.style.display = "none";
+			}
+			
+			// Optional: Close modal when clicking outside (for a true popup effect)
+			window.onclick = function(event) {
+			  if (event.target === modal) {
+				modal.style.display = "none";
 			  }
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-			  console.error("Error fetching available times:", textStatus, errorThrown);
 			}
-		  });
-		});
-	  });
-</script>
-<script>
-	var isOpen = false;
-	document.getElementById('openPdfBtn').addEventListener('click', function() {
-        if (isOpen) {
-            document.getElementById('pdfcontainer').style.display = 'none';
-            document.getElementById('openPdfBtn').innerText = 'View Menu';
-        } else {
-            var pdfSrc = "{% static 'full-menu.pdf' %}";
-            document.getElementById('pdfcontainer').style.display = 'block';
-            document.getElementById('openPdfBtn').innerText = 'Close Menu';
-        }
-		document.getElementById('pdfIframe').src = pdfSrc; 
-
-        isOpen = !isOpen;
-    });
-
-
-	  
-</script>
-
-{% comment %} <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var isOpen = false;
-		var imageContainer = document.getElementById('drinksimagecontainer');
-		var pdfViewer = document.getElementById('drinkspdf-viewer');
-		var menuButton = document.getElementById('drinks-menu-button');
-	
-		menuButton.addEventListener('click', function() {
-			if (isOpen) {
-				imageContainer.style.display = 'block';
-				pdfViewer.style.display = 'none';
-				menuButton.innerText = 'View Menu';
-			} else {
-				imageContainer.style.display = 'none';
-				pdfViewer.style.display = 'block';
-				menuButton.innerText = 'Close Menu';
-				// Replace 'YOUR_PDF_URL_HERE' with the URL of your PDF
-				pdfViewer.src = '{% static 'full-menu.pdf' %}';
-			}
-			isOpen = !isOpen;
-		});
-	});
-	
-</script> {% endcomment %}
-
+			</script>
 
 	</body>
 </html>

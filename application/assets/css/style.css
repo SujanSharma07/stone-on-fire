@@ -2144,20 +2144,57 @@ textarea.input-field {
 
 
 
-#pdfcontainer {
-	display: none;
-	margin-top: 20px;
-    width: 100%;
-    height: 600px; /* Adjust height as needed */
-    overflow-y: scroll; /* Enable vertical scrolling */
-
-  }
 
 
-#drinkspdf-viewer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Same width as the image */
-    height: 100%; /* Same height as the image */
+
+/* Modal */
+.modal {
+	display: none; /* Initially hidden */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+}
+
+.modal-content {
+	margin: 15% auto; /* 15% from top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* Adjust width as needed */
+	background-color: white;
+	animation-name: zoom; /* Add zoom animation (optional) */
+	animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+	from {transform:scale(0)}
+	to {transform:scale(1)}
+}
+
+/* Close button (x) */
+.close {
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+	color: red;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* PDF Iframe */
+#pdfIframe {
+	width: 100%;
+	height: 100%;
 }
