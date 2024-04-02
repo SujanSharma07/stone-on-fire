@@ -92,8 +92,11 @@
 						<ion-icon name="time-outline" aria-hidden="true"></ion-icon>
 					</div>
 
-					<span class="span">Daily : 8.00 am to 10.00 pm</span>
+					<span class="span">Breakfast 7.30 am - 2.30 pm</span>
+					<span class="span">Dinner 5 pm - 9 pm</span>
+
 				</div>
+
 
 				<a href="tel:+611234567890" class="topbar-item link">
 					<div class="icon">
@@ -265,7 +268,7 @@
 								Come with family & feel the joy of mouthwatering food
 							</p>
 
-							<a href="#" class="btn btn-primary slider-reveal">
+							<a href="#menu" class="btn btn-primary slider-reveal">
 								<span class="text text-1">View Our Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
@@ -462,9 +465,13 @@
 												height="336"
 												loading="lazy"
 												alt="Drinks"
+												id="drinksimagecontainer"
 												class="img-cover"
 											/>
+											<iframe id="drinkspdf-viewer" style="display: none;"></iframe>
+
 										</figure>
+										
 									</a>
 
 									<div class="card-content">
@@ -472,8 +479,8 @@
 											<a href="#">Drinks</a>
 										</h3>
 
-										<a href="#" class="btn-text hover-underline label-2"
-											>View Menu</a
+										<button href="#" class="btn-text hover-underline label-2" id="drinks-menu-button"
+											>View Menu</button
 										>
 									</div>
 								</div>
@@ -672,6 +679,9 @@
 
 						<h2 class="headline-1 section-title text-center">Delicious Menu</h2>
 
+
+
+						
 						<ul class="grid-list">
 							<li>
 								<div class="menu-card hover:card">
@@ -881,11 +891,15 @@
 							<span class="span">9:00 pm</span>
 						</p>
 
-						<a href="#" class="btn btn-primary">
+						<div id="pdfcontainer" name="menupdfviewer" style="display:none;">
+							<iframe id="pdfIframe" src="{% static 'full-menu.pdf' %}" width="100%" height="600px"></iframe>
+						</div>
+
+						<button href="" class="btn btn-primary" id="openPdfBtn" >
 							<span class="text text-1">View All Menu</span>
 
 							<span class="text text-2" aria-hidden="true">View All Menu</span>
-						</a>
+						</button>
 
 						<img
 							src="{% static 'images/shape-5.png' %}"
@@ -1359,8 +1373,13 @@
 						<a href="tel:+88123123456" class="body-4 contact-link"
 							>Booking Request : +88-123-123456</a
 						>
+						<p class="body-4"><strong>Breakfast/Lunch</strong></p>
+						<p class="body-4">Weekday : 07:30 am - 02:30 pm</p>
+						<p class="body-4">Weekends : 08:00 am - 03:00 pm</p>
+						<p class="body-4"><strong>Dinner</strong></p>
+							<p class="body-4">Weekday : 05:00 pm - 09:00 pm</p>
+							<p class="body-4">Weekends : 05:00 pm - 09:30 pm</p>
 
-						<p class="body-4">Open : 09:00 am - 01:00 pm</p>
 
 						<div class="wrapper">
 							<div class="separator"></div>
@@ -1425,20 +1444,20 @@
 
 					<ul class="footer-list">
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline"
+							<a href="https://www.facebook.com/profile.php?id=61557589155256" class="label-2 footer-link hover-underline"
 								>Facebook</a
 							>
 						</li>
 
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline"
+							<a href="https://www.instagram.com/stoneonfire_2024/" class="label-2 footer-link hover-underline"
 								>Instagram</a
 							>
 						</li>
 
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline"
-								>Twitter</a
+							<a href="https://www.tiktok.com/@stone_on_fire_2024?_t=8l9wGg6qCp8&_r=1" class="label-2 footer-link hover-underline"
+								>Tiktok</a
 							>
 						</li>
 
@@ -1551,8 +1570,50 @@
 		});
 	  });
 </script>
+<script>
+	var isOpen = false;
+	document.getElementById('openPdfBtn').addEventListener('click', function() {
+        if (isOpen) {
+            document.getElementById('pdfcontainer').style.display = 'none';
+            document.getElementById('openPdfBtn').innerText = 'View Menu';
+        } else {
+            var pdfSrc = "{% static 'full-menu.pdf' %}";
+            document.getElementById('pdfcontainer').style.display = 'block';
+            document.getElementById('openPdfBtn').innerText = 'Close Menu';
+        }
+		document.getElementById('pdfIframe').src = pdfSrc; 
+
+        isOpen = !isOpen;
+    });
 
 
+	  
+</script>
+
+{% comment %} <script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var isOpen = false;
+		var imageContainer = document.getElementById('drinksimagecontainer');
+		var pdfViewer = document.getElementById('drinkspdf-viewer');
+		var menuButton = document.getElementById('drinks-menu-button');
+	
+		menuButton.addEventListener('click', function() {
+			if (isOpen) {
+				imageContainer.style.display = 'block';
+				pdfViewer.style.display = 'none';
+				menuButton.innerText = 'View Menu';
+			} else {
+				imageContainer.style.display = 'none';
+				pdfViewer.style.display = 'block';
+				menuButton.innerText = 'Close Menu';
+				// Replace 'YOUR_PDF_URL_HERE' with the URL of your PDF
+				pdfViewer.src = '{% static 'full-menu.pdf' %}';
+			}
+			isOpen = !isOpen;
+		});
+	});
+	
+</script> {% endcomment %}
 
 
 	</body>

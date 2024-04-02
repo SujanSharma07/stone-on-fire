@@ -47,4 +47,4 @@ static
 mysql
 mediafiles
 staticfiles
-./script.py
+script.py

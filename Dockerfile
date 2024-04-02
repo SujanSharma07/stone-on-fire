@@ -31,9 +31,9 @@ RUN pip3 install gunicorn==21.2.0
 
 COPY ./application .
 
-RUN python3 manage.py collectstatic
+# RUN python3 manage.py collectstatic
 
-USER ${USER}
+# USER ${USER}
 
 CMD [ "gunicorn" , "config.wsgi:application" , "-b" , "0.0.0.0:20001" , "--workers" , "4", "--threads", "2", "--log-level" , "info"]
 

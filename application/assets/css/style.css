@@ -2141,3 +2141,23 @@ textarea.input-field {
   }
 
 }
+
+
+
+#pdfcontainer {
+	display: none;
+	margin-top: 20px;
+    width: 100%;
+    height: 600px; /* Adjust height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
+
+  }
+
+
+#drinkspdf-viewer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Same width as the image */
+    height: 100%; /* Same height as the image */
+}
