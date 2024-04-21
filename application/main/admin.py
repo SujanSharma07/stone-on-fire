@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.utils import timezone
-
 from main.models import Reservation
 
 # Register your models here.
@@ -131,7 +130,7 @@ class CustomUpdateOnlyAdmin(CustomModelAdmin):
 
 @admin.register(Reservation)
 class AdvertisementAdmin(CustomModelAdmin):
-    list_display = ("name", "reservation_date", "reservation_time")
+    list_display = ("customer_name", "reservation_date", "reservation_time")
     list_filter = ("created_on_np_date", "reservation_date", "reservation_time")
     search_fields = ("name",)
     ignore_fields = [""]

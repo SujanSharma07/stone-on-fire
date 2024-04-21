@@ -20,7 +20,9 @@
 		<!-- 
     - favicon
   -->
-		<link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon" />
+
+		<link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/svg+xml" />
 
 		<!-- 
     - google font link
@@ -327,13 +329,13 @@
 								Come with family & feel the joy of mouthwatering food
 							</p>
 
-							<a href="#menu" class="btn btn-primary slider-reveal">
+							<button class="btn btn-primary slider-reveal openPdfBtn">
 								<span class="text text-1">View Our Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
 									>View Our Menu</span
 								>
-							</a>
+							</button>
 						</li>
 
 						<li class="slider-item" data-hero-slider-item>
@@ -360,13 +362,13 @@
 								Come with family & feel the joy of mouthwatering food
 							</p>
 
-							<a href="#menu" class="btn btn-primary slider-reveal">
+							<button class="btn btn-primary slider-reveal openPdfBtn">
 								<span class="text text-1">View Our Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
 									>View Our Menu</span
 								>
-							</a>
+							</button>
 						</li>
 
 						<li class="slider-item" data-hero-slider-item>
@@ -393,13 +395,13 @@
 								Come with family & feel the joy of mouthwatering food
 							</p>
 
-							<a href="#menu" class="btn btn-primary slider-reveal">
+							<button class="btn btn-primary slider-reveal openPdfBtn">
 								<span class="text text-1">View Our Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
 									>View Our Menu</span
 								>
-							</a>
+							</button>
 						</li>
 					</ul>
 
@@ -474,8 +476,8 @@
 											<a href="#">Breakfast</a>
 										</h3>
 
-										<a href="#" class="btn-text hover-underline label-2"
-											>View Menu</a
+										<button class="btn-text hover-underline label-2 openPdfBtn"
+											>View Menu</button
 										>
 									</div>
 								</div>
@@ -504,8 +506,8 @@
 											<a href="#">Appetizers</a>
 										</h3>
 
-										<a href="#" class="btn-text hover-underline label-2"
-											>View Menu</a
+										<button class="btn-text hover-underline label-2 openPdfBtn"
+											>View Menu</button
 										>
 									</div>
 								</div>
@@ -541,7 +543,7 @@
 
 										<button
 											href="#"
-											class="btn-text hover-underline label-2"
+											class="btn-text hover-underline label-2 openPdfBtn"
 											id="drinks-menu-button"
 										>
 											View Menu
@@ -702,13 +704,13 @@
 								<span class="span body-1">$20.00</span>
 							</div>
 
-							<a href="#menu" class="btn btn-primary" >
+							<button class="btn btn-primary openPdfBtn" >
 								<span class="text text-1">View All Menu</span>
 
 								<span class="text text-2" aria-hidden="true"
 									>View All Menu</span
 								>
-							</a>
+							</button>
 						</div>
 					</div>
 
@@ -967,7 +969,7 @@
 													</div>
 												</div>
 						<!-- Button to trigger the modal -->
-						<button class="btn btn-primary" id="openPdfBtn">
+						<button class="btn btn-primary openPdfBtn" id="openPdfBtn">
 							<span class="text text-1">View All Menu</span>
 							<span class="text text-2" aria-hidden="true">View All Menu</span>
 						</button>
@@ -1054,10 +1056,12 @@
 									or fill out the order form
 								</p>
 
+								
+
 								<div class="input-wrapper">
 									<input
 										type="text"
-										name="name"
+										name="customer_name"
 										placeholder="Your Name"
 										autocomplete="off"
 										required="true"
@@ -1066,7 +1070,7 @@
 
 									<input
 										type="tel"
-										name="phone"
+										name="customer_phone"
 										placeholder="Phone Number"
 										autocomplete="off"
 										required="true"
@@ -1129,7 +1133,7 @@
 								</div>
 
 								<textarea
-									name="message"
+									name="customer_message"
 									placeholder="Message"
 									autocomplete="off"
 									class="input-field"
@@ -1462,31 +1466,6 @@
 							<div class="separator"></div>
 						</div>
 
-						<p class="title-1">Get News & Offers</p>
-
-						<p class="label-1">
-							Subscribe us & Get <span class="span">25% Off.</span>
-						</p>
-
-						<form action="" class="input-wrapper">
-							<div class="icon-wrapper">
-								<ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-
-								<input
-									type="email"
-									name="email_address"
-									placeholder="Your email"
-									autocomplete="off"
-									class="input-field"
-								/>
-							</div>
-
-							<button type="submit" class="btn btn-secondary">
-								<span class="text text-1">Subscribe</span>
-
-								<span class="text text-2" aria-hidden="true">Subscribe</span>
-							</button>
-						</form>
 					</div>
 
 					<ul class="footer-list">
@@ -1654,73 +1633,39 @@
 				});
 			});
 		</script>
-		{% comment %}
-		<script>
-			var isOpen = false;
-			document
-				.getElementById("openPdfBtn")
-				.addEventListener("click", function () {
-					if (isOpen) {
-						document.getElementById("pdfcontainer").style.display = "none";
-						document.getElementById("openPdfBtn").innerText = "View Menu";
-					} else {
-						var pdfSrc = "{% static 'full-menu.pdf' %}";
-						document.getElementById("pdfcontainer").style.display = "block";
-						document.getElementById("openPdfBtn").innerText = "Close Menu";
-					}
-					document.getElementById("pdfIframe").src = pdfSrc;
 
-					isOpen = !isOpen;
-				});
-		</script>
-		{% endcomment %} {% comment %}
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				var isOpen = false;
-				var imageContainer = document.getElementById('drinksimagecontainer');
-				var pdfViewer = document.getElementById('drinkspdf-viewer');
-				var menuButton = document.getElementById('drinks-menu-button');
+<script>
+    // Get the modal and button elements
+    var modal = document.getElementById("pdfModal");
+    var btns = document.querySelectorAll(".openPdfBtn");
+    var span = document.getElementsByClassName("close")[0];
+    
+    // Function to open the modal
+    function openModal() {
+        modal.style.display = "block";
+    }
 
-				menuButton.addEventListener('click', function() {
-					if (isOpen) {
-						imageContainer.style.display = 'block';
-						pdfViewer.style.display = 'none';
-						menuButton.innerText = 'View Menu';
-					} else {
-						imageContainer.style.display = 'none';
-						pdfViewer.style.display = 'block';
-						menuButton.innerText = 'Close Menu';
-						// Replace 'YOUR_PDF_URL_HERE' with the URL of your PDF
-						pdfViewer.src = '{% static 'full-menu.pdf' %}';
-					}
-					isOpen = !isOpen;
-				});
-			});
-		</script>
-		{% endcomment %}
-		<script>
-			// Get the modal and button elements
-			var modal = document.getElementById("pdfModal");
-			var btn = document.getElementById("openPdfBtn");
-			var span = document.getElementsByClassName("close")[0];
-			
-			// When the user clicks the button, open the modal
-			btn.onclick = function() {
-			  modal.style.display = "block";
-			}
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
-			  modal.style.display = "none";
-			}
-			
-			// Optional: Close modal when clicking outside (for a true popup effect)
-			window.onclick = function(event) {
-			  if (event.target === modal) {
-				modal.style.display = "none";
-			  }
-			}
-			</script>
+    // Function to close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+    
+    // Attach click event listener to each button
+    btns.forEach(function(btn) {
+        btn.onclick = openModal;
+    });
+    
+    // Close modal when clicking on <span> (x)
+    span.onclick = closeModal;
+    
+    // Optional: Close modal when clicking outside (for a true popup effect)
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+</script>
+
 
 	</body>
 </html>

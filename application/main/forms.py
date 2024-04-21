@@ -5,15 +5,16 @@ from .models import Reservation
 
 
 class ReservationForm(forms.ModelForm):
-    message = forms.CharField(required=False, widget=forms.Textarea)
+    customer_message = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
         model = Reservation
         fields = [
-            "name",
-            "phone",
+            "customer_name",
+            "customer_phone",
+            "customer_email",
             "customer_counts",
             "reservation_date",
             "reservation_time",
-            "message",
+            "customer_message",
         ]

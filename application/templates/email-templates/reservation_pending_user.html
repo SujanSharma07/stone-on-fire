@@ -1,0 +1,25 @@
+{% extends "email-templates/base.html" %}
+
+
+{% autoescape off %}
+{% block email_title %}
+Reservation Requested
+
+{% endblock %}
+
+{% block email_content%}
+Dear {{customer_name}},
+
+Thank you for choosing to dine with us. Your reservation request has been received.
+
+Reservation Details:
+
+Date: {{reservation_date}}
+Time: {{reservation_time}}
+Number of Guests: {{customer_counts}}
+We will review your request and send you a confirmation shortly.
+
+Thank you!
+{% endblock %}
+
+{% endautoescape %}

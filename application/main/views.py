@@ -3,6 +3,7 @@ from datetime import datetime, time
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
+from main.models import Reservation
 
 from .forms import ReservationForm
 
@@ -73,12 +74,14 @@ def transform_time_format(input_time):
 @csrf_exempt
 def available_times(request):
     reservation_date = request.GET["date"]
-    print(reservation_date)
-    # reservations = Reservation.objects.filter(date=selected_date)
-    # # Extract existing booked times
+    available_times = Reservation.get_available_times(reservation_date=reservation_date)
     # booked_times = [reservation.time for reservation in reservations]
     # # Get all available times (replace with your logic)
     # available_times = ['10:00', '11:00', '12:00', ...]  # Replace with your time slots
     # # Filter out booked times from available times
     # available_times = [time for time in available_times if time not in booked_times]
     # return JsonResponse(available_times, safe=False)
+
+    reservation_date = request.GET["date"]
+    available_times = Reservation.get_available_times(reservation_date=reservation_date)
+    return JsonResponse(available_times, safe=False)

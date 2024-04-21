@@ -63,6 +63,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Custom
+                "main.request.settings_context",
             ],
         },
     },
@@ -131,3 +133,22 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# User Customs
+FACEBOOK_PAGE = "https://www.facebook.com/profile.php?id=61557589155256"
+TIKTOK_PAGE = "https://www.tiktok.com/@stone_on_fire_2024?_t=8l9wGg6qCp8&_r=1"
+INSTA_PAGE = "https://www.instagram.com/stoneonfire_2024/"
+OWNER_NUMBER = ""
+OWNER_EMAIL = "sujansharma202@gmail.com"
+OWNER_ADDRESS = ""
+SITE_NAME = "Stone on Fire"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # SMTP server address (e.g., 'smtp.example.com')
+EMAIL_PORT = 587  # SMTP port number (587 is the default for TLS)
+EMAIL_USE_TLS = True  # Enable TLS (True or False)
+EMAIL_HOST_USER = "stoneonfire2024@gmail.com"  # SMTP username
+EMAIL_HOST_PASSWORD = "Lucky@2024"  # SMTP password
+DEFAULT_FROM_EMAIL = "stoneonfire2024@gmail.com"

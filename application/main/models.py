@@ -1,4 +1,8 @@
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.db import models
+from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -15,6 +19,20 @@ AVAILABLE_TIMESLOTS = {
     "04:00PM",
     "05:00PM",
 }
+
+EMAIL_SCOPE_USER = {
+    "RESERVATION_PENDING": {
+        "subject": "Reservation Request Received: In Review",
+        "template_path": "email-templates/reservation_pending_user.html",
+    },
+    "RESERVATION_CONFIRM": {
+        "subject": "Reservation Request Confirmed",
+        "template_path": "email-templates/reservation_pending_user.html",
+    },
+    "REVIEW": "",
+}
+
+EMAIL_SCOPE_ADMIN = {"RESERVATION_PENDING": "", "RESERVATION_CONFIRM": "", "REVIEW": ""}
 
 
 class TimeStampedModel(models.Model):
@@ -89,16 +107,18 @@ class Reservation(BaseModel):
         (CANCLED, CANCLED),
         (COMPLETED, COMPLETED),
     ]
-    name = models.CharField(max_length=255, help_text="Customers full name")
-
-    email = models.EmailField(
+    customer_name = models.CharField(max_length=255, help_text="Customers full name")
+    customer_email = models.CharField(
+        max_length=255, help_text="Customers contact email"
+    )
+    customer_email = models.EmailField(
         max_length=255,
         unique=True,
         null=True,
         blank=True,
         db_index=True,
     )
-    phone = models.CharField(
+    customer_phone = models.CharField(
         max_length=13, db_index=True, help_text="Contact number for the customer"
     )
     reservation_date = models.DateField(help_text="Date of reservation")
@@ -108,10 +128,10 @@ class Reservation(BaseModel):
         help_text="Number of Customers for the table"
     )
     status = models.CharField(choices=STATUS_CHOICES, max_length=25, default=REQUESTED)
-    message = models.TextField()
+    customer_message = models.TextField()
 
     def __str__(self):
-        return f"{self.reservation_date} - {self.name}"
+        return f"{self.reservation_date} - {self.customer_name}"
 
     @classmethod
     def get_available_times(cls, reservation_date):
@@ -125,9 +145,34 @@ class Reservation(BaseModel):
             not_available_time = {
                 convert_to_12_hour_format(time[0]) for time in t_reservations
             }
-            return AVAILABLE_TIMESLOTS - not_available_time
+            return list(AVAILABLE_TIMESLOTS - not_available_time)
 
-        return AVAILABLE_TIMESLOTS
+        return list(AVAILABLE_TIMESLOTS)
+
+    def get_model_dict(self):
+        return model_to_dict(
+            self,
+            fields=[
+                "customer_name",
+                "reservation_date",
+                "reservation_time",
+                "customer_counts",
+            ],
+        )
+
+    def send_email(self, scope, admin=False):
+        templates_values = EMAIL_SCOPE_USER[scope]
+        mail_subject = templates_values.get("subject", "")
+        template_path = templates_values.get("template_path", "")
+        message = render_to_string(
+            template_path,
+            self.get_model_dict(),
+        )
+        rec_email = settings.OWNER_EMAIL if admin else self.customer_email
+        email = EmailMessage(mail_subject, message, to=[rec_email])
+        email.content_subtype = "html"  # this is the crucial part
+
+        email.send()
 
 
 # Function to convert datetime.time to string in "08:00am" format
