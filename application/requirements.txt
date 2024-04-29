@@ -27,3 +27,4 @@ distlib==0.3.7
 distro==1.8.0
 Django==4.2.4
 dnspython==2.4.1
+ipython

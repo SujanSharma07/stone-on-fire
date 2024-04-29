@@ -169,25 +169,3 @@ window.addEventListener("mousemove", function (event) {
 
 });
 
-
-// Get the modal and button elements
-var modal = document.getElementById("pdfModal");
-var btn = document.getElementById("openPdfBtn");
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// Optional: Close modal when clicking outside (for a true popup effect)
-window.onclick = function(event) {
-  if (event.target.modal && event.target.modal === modal) {
-    modal.style.display = "none";
-  }
-}

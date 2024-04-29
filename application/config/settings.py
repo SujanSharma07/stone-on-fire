@@ -145,10 +145,10 @@ OWNER_ADDRESS = ""
 SITE_NAME = "Stone on Fire"
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"  # SMTP server address (e.g., 'smtp.example.com')
-EMAIL_PORT = 587  # SMTP port number (587 is the default for TLS)
-EMAIL_USE_TLS = True  # Enable TLS (True or False)
-EMAIL_HOST_USER = "stoneonfire2024@gmail.com"  # SMTP username
-EMAIL_HOST_PASSWORD = "Lucky@2024"  # SMTP password
-DEFAULT_FROM_EMAIL = "stoneonfire2024@gmail.com"
+EMAIL_HOST = "live.smtp.mailtrap.io"
+EMAIL_HOST_USER = "api"
+EMAIL_HOST_PASSWORD = "f64a801fc5c122b8eb449f368931329c"
+EMAIL_PORT = "587"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = "stoneonfire@stoneonfire.com.au"
