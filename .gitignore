@@ -48,3 +48,5 @@ mysql
 mediafiles
 staticfiles
 script.py
+*.key
+*.crt

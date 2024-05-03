@@ -23,6 +23,7 @@
   <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon" />
 
 		<link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/svg+xml" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
 
 		<!-- 
     - google font link
@@ -51,6 +52,17 @@
 				font-family: sans-serif;
 			}
 	
+			.error-message {
+				color: red;
+				margin-bottom: 10px; /* Add space between error messages and form fields */
+			}
+			
+			.error-block {
+				border: 1px solid red;
+				padding: 10px;
+				margin-bottom: 20px; /* Add space between error block and form */
+			}
+			
 			/* Modal styles */
 			.modal {
 				display: none; /* Initially hidden */
@@ -1072,6 +1084,15 @@
 									/>
 								</div>
 
+
+								<input
+								type="email"
+								name="customer_email" 
+								placeholder="Your Email" 
+								autocomplete="off"
+								required="true" 
+								class="input-field"
+							/>
 								<div class="input-wrapper">
 									<div class="icon-wrapper">
 										<ion-icon
@@ -1558,6 +1579,8 @@
 			type="module"
 			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
 		></script>
+		<script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+
 		<script
 			nomodule
 			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
@@ -1567,28 +1590,66 @@
 		<script>
 			document.addEventListener("DOMContentLoaded", function () {
 				const reservationForm = document.getElementById("reservation_form");
-
+			
 				reservationForm.addEventListener("submit", function (event) {
 					event.preventDefault();
-
+			
+					// Remove any existing error messages
+					const existingErrorMessages = document.querySelectorAll('.error-message');
+					existingErrorMessages.forEach((errorMessage) => {
+						errorMessage.parentNode.removeChild(errorMessage);
+					});
+			
 					// Serialize form data
 					const formData = new FormData(reservationForm);
-
+			
 					// Send form data to the Django backend using fetch
 					fetch("/reservation/", {
 						method: "POST",
 						body: formData,
 					})
-						.then((response) => response.json()) // Assuming your backend returns JSON
-						.then((data) => {
-							// Handle the response data as needed
-							console.log(data);
-						})
-						.catch((error) => {
-							console.error("Error:", error);
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then((data) => {
+						if (data.status === "error" && data.errors) {
+							// Handle error messages
+							Object.keys(data.errors).forEach((fieldName) => {
+								const field = document.querySelector(`[name="${fieldName}"]`);
+								if (field) {
+									const errorContainer = document.createElement('div');
+									errorContainer.classList.add('error-message');
+									errorContainer.textContent = data.errors[fieldName][0]; // Display the first error message only
+									
+									// Insert error message above the field
+									field.parentNode.insertBefore(errorContainer, field);
+								}
+							});
+						} else if (data.status === "success") {
+							// Handle success message
+							iziToast.success({
+								title: 'Success!',
+								message: 'Your reservation has been successfully submitted.',
+								position: 'topRight'
+							});
+						}
+						console.log(data); // Log data to console for debugging
+					})
+					.catch((error) => {
+						iziToast.error({
+							title: 'Error!',
+							message: 'Network response was not ok',
+							position: 'topRight'
 						});
+						console.error("Error:", error);
+					});
 				});
 			});
+			
+			
 
 			// Ajax code to provide available time dynamically
 

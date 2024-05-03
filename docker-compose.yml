@@ -21,8 +21,8 @@ services:
       - ./application/assets:/usr/src/app/staticfiles
       - ./application/mediafiles:/usr/src/app/mediafiles
       - ./nginx/conf:/etc/nginx/conf.d
-      #- ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/cert:/etc/nginx/ssl
     ports:
-      - 443:80
+      - 443:443
     depends_on:
       - app

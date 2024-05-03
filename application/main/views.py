@@ -37,7 +37,7 @@ def reservation_view(request):
             # Additional logic (e.g., sending email, etc.) can be added here
             return JsonResponse({"status": "success", "reservation_id": reservation.id})
         else:
-            return JsonResponse({"status": "error", "errors": form.errors}, status=400)
+            return JsonResponse({"status": "error", "errors": form.errors}, status=200)
 
     # If the request method is not POST, return an error response
     return JsonResponse(
