@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- 
+    - primary meta tags
+  -->
+		<title>Stone on fire - Amazing & Delicious Food</title>
+		<meta name="title" content="Stone on fire - Amazing & Delicious Food" />
+		<meta
+			name="description"
+			content="This is a Restaurant html template made by sujan"
+		/>
+
+		<!-- 
+    - favicon
+  -->
+  <link rel="icon" href="assets/images/logo.png" type="image/x-icon" />
+
+		<link rel="shortcut icon" href="assets/images/logo.png" type="image/svg+xml" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+
+		<!-- 
+    - google font link
+  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<!-- 
+    - custom css link
+  -->
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<style>
+			/* Reset some common styles to avoid conflicts */
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+	
+			body {
+				font-family: sans-serif;
+			}
+	
+			.error-message {
+				color: red;
+				margin-bottom: 10px; /* Add space between error messages and form fields */
+			}
+			
+			.error-block {
+				border: 1px solid red;
+				padding: 10px;
+				margin-bottom: 20px; /* Add space between error block and form */
+			}
+			
+			/* Modal styles */
+			.modal {
+				display: none; /* Initially hidden */
+				position: fixed; /* Stay in place */
+				z-index: 9999; /* Ensure high z-index to override other elements */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+			}
+	
+			.modal-content {
+				margin: 5% auto; /* 15% from top and centered */
+				padding: 0px;
+				border: 1px solid #888;
+				width: 100%; 
+				height: 100%; /* Adjust width as needed */
+				background-color: white;
+				animation-name: zoom; /* Add zoom animation (optional) */
+				animation-duration: 0.6s;
+			}
+	
+			@keyframes zoom {
+				from {transform:scale(0)}
+				to {transform:scale(1)}
+			}
+	
+			/* Close button (x) */
+			.close {
+				color: #fff;
+				font-size: 30px;
+				font-weight: bold;
+				position: absolute;
+				top: 10px;
+				right: 15px;
+				cursor: pointer;
+			}
+	
+			.close:hover,
+			.close:focus {
+				color: red;
+				text-decoration: none;
+				cursor: pointer;
+			}
+	
+			/* PDF Iframe */
+			#pdfIframe {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<!-- 
+    - preload images
+  -->
+		<link
+			rel="preload"
+			as="image"
+			href="assets/images/hero-slider-1.jpg"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="assets/images/hero-slider-2.jpg"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="assets/images/hero-slider-3.jpg"
+		/>
+	</head>
+
+	<body id="top">
+		<!-- 
+    - #PRELOADER
+  -->
+
+		<div class="preload" data-preaload>
+			<div class="circle"></div>
+			<p class="text">Stone on fire</p>
+		</div>
+
+		<!-- 
+    - #TOP BAR
+  -->
+
+		<div class="topbar">
+			<div class="container">
+				<address class="topbar-item">
+					<div class="icon">
+						<ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+					</div>
+
+					<span class="span">
+						472 bridge road, Richmond, Melbourne 3121, Australia
+					</span>
+				</address>
+
+				<div class="separator"></div>
+
+				<div class="topbar-item item-2">
+					<div class="icon">
+						<ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+					</div>
+
+					<span class="span">Breakfast 7.30 am - 2.30 pm</span>
+					<span class="span">Dinner 5 pm - 9 pm</span>
+				</div>
+
+				<a href="tel:+61469226657" class="topbar-item link">
+					<div class="icon">
+						<ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+					</div>
+
+					<span class="span">+61 469 226 657</span>
+				</a>
+
+				<div class="separator"></div>
+
+				<a href="mailto:stoneonfire2024@gmail.com" class="topbar-item link">
+					<div class="icon">
+						<ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+					</div>
+
+					<span class="span">stoneonfire2024@gmail.com</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- 
+    - #HEADER
+  -->
+
+		<header class="header" data-header>
+			<div class="container">
+				<a href="#" class="logo">
+					<img
+						src="assets/images/logo.png"
+						width="160"
+						height="50"
+						alt="Stone on fire - Home"
+					/>
+				</a>
+
+				<nav class="navbar" data-navbar>
+					<button class="close-btn" aria-label="close menu" data-nav-toggler>
+						<ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+					</button>
+
+					<a href="#" class="logo">
+						<img
+							src="assets/images/logo.png"
+							width="160"
+							height="50"
+							alt="Stone on fire - Home"
+						/>
+					</a>
+
+					<ul class="navbar-list">
+						<li class="navbar-item">
+							<a href="#home" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Home</span>
+							</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#about" class="navbar-link hover-underline active">
+								<div class="separator"></div>
+
+								<span class="span">About Us</span>
+							</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#menu" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Menus</span>
+							</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Gallery</span>
+							</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Book Now</span>
+							</a>
+						</li>
+						<li class="navbar-item">
+							<a href="#" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Find Us</span>
+							</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#" class="navbar-link hover-underline">
+								<div class="separator"></div>
+
+								<span class="span">Contact</span>
+							</a>
+						</li>
+					</ul>
+
+					<div class="text-center">
+						<p class="headline-1 navbar-title">Visit Us</p>
+
+						<address class="body-4">
+							472 bridge road, Richmond, <br />
+							Melbourne 23173, Australia
+						</address>
+
+						<p class="body-4 navbar-text">Open: 9.30 am - 2.30pm</p>
+
+						<a
+							href="mailto:stoneonfire2024@gmail.com"
+							class="body-4 sidebar-link"
+							>stoneonfire2024@gmail.com</a
+						>
+
+						<div class="separator"></div>
+
+						<p class="contact-label">Booking Request</p>
+
+						<a
+							href="tel:+61469226657"
+							class="body-1 contact-number hover-underline"
+						>
+							+61469226657
+						</a>
+					</div>
+				</nav>
+
+				<a href="#reservation_form" class="btn btn-secondary">
+					<span class="text text-1">Find A Table</span>
+
+					<span class="text text-2" aria-hidden="true">Find A Table</span>
+				</a>
+
+				<button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+					<span class="line line-1"></span>
+					<span class="line line-2"></span>
+					<span class="line line-3"></span>
+				</button>
+
+				<div class="overlay" data-nav-toggler data-overlay></div>
+			</div>
+		</header>
+
+		<main>
+			<article>
+				<!-- 
+        - #HERO
+      -->
+
+				<section class="hero text-center" aria-label="home" id="home">
+					<ul class="hero-slider" data-hero-slider>
+						<li class="slider-item active" data-hero-slider-item>
+							<div class="slider-bg">
+								<img
+									src="assets/images/professional/43_FIRE_HIGH RES.jpg"
+									width="1880"
+									height="950"
+									alt=""
+									class="img-cover"
+								/>
+							</div>
+
+							<p class="label-2 section-subtitle slider-reveal">
+								Tradational & Hygine
+							</p>
+
+							<h1 class="display-1 hero-title slider-reveal">
+								For the love of <br />
+								delicious food
+							</h1>
+
+							<p class="body-2 hero-text slider-reveal">
+								Come with family & feel the joy of mouthwatering food
+							</p>
+
+							<button class="btn btn-primary slider-reveal openPdfBtn">
+								<span class="text text-1">View Our Menu</span>
+
+								<span class="text text-2" aria-hidden="true"
+									>View Our Menu</span
+								>
+							</button>
+						</li>
+
+						<li class="slider-item" data-hero-slider-item>
+							<div class="slider-bg">
+								<img
+									src="assets/images/professional/62_FIRE_HIGH RES.jpg"
+									width="1880"
+									height="950"
+									alt=""
+									class="img-cover"
+								/>
+							</div>
+
+							<p class="label-2 section-subtitle slider-reveal">
+								delightful experience
+							</p>
+
+							<h1 class="display-1 hero-title slider-reveal">
+								Flavors Inspired by <br />
+								the Seasons
+							</h1>
+
+							<p class="body-2 hero-text slider-reveal">
+								Come with family & feel the joy of mouthwatering food
+							</p>
+
+							<button class="btn btn-primary slider-reveal openPdfBtn">
+								<span class="text text-1">View Our Menu</span>
+
+								<span class="text text-2" aria-hidden="true"
+									>View Our Menu</span
+								>
+							</button>
+						</li>
+
+						<li class="slider-item" data-hero-slider-item>
+							<div class="slider-bg">
+								<img
+									src="assets/images/professional/19_FIRE_HIGH RES.jpg"
+									width="1880"
+									height="950"
+									alt=""
+									class="img-cover"
+								/>
+							</div>
+
+							<p class="label-2 section-subtitle slider-reveal">
+								amazing & delicious
+							</p>
+
+							<h1 class="display-1 hero-title slider-reveal">
+								Where every flavor <br />
+								tells a story
+							</h1>
+
+							<p class="body-2 hero-text slider-reveal">
+								Come with family & feel the joy of mouthwatering food
+							</p>
+
+							<button class="btn btn-primary slider-reveal openPdfBtn">
+								<span class="text text-1">View Our Menu</span>
+
+								<span class="text text-2" aria-hidden="true"
+									>View Our Menu</span
+								>
+							</button>
+						</li>
+					</ul>
+
+					<button
+						class="slider-btn prev"
+						aria-label="slide to previous"
+						data-prev-btn
+					>
+						<ion-icon name="chevron-back"></ion-icon>
+					</button>
+
+					<button
+						class="slider-btn next"
+						aria-label="slide to next"
+						data-next-btn
+					>
+						<ion-icon name="chevron-forward"></ion-icon>
+					</button>
+
+					<a href="#" class="hero-btn has-after">
+						<img
+							src="assets/images/hero-icon.png"
+							width="48"
+							height="48"
+							alt="booking icon"
+						/>
+
+						<span class="label-2 text-center span">Book A Table</span>
+					</a>
+				</section>
+
+				<!-- 
+        - #SERVICE
+      -->
+
+
+
+
+				<section class="section features text-center" aria-label="features">
+					<div class="container">
+						<p class="section-subtitle label-2">Why Choose Us</p>
+
+						<h2 class="headline-1 section-title">Our Strength</h2>
+
+						<ul class="grid-list">
+							
+							<li class="feature-item">
+								<div class="feature-card">
+									<div class="card-icon">
+										<img
+											src="assets/images/features-icon-1.png"
+											width="100"
+											height="80"
+											loading="lazy"
+											alt="icon"
+										/>
+									</div>
+
+									<h3 class="title-2 card-title">Tasty & Hygienic Food</h3>
+
+									<p class="label-1 card-text">
+										Indulge in our kitchen's passion for hygiene, where every dish is crafted with care and cleanliness, ensuring every bite is not just delightful but also safe			</p></div>				</li>
+
+							<li class="feature-item">
+								<div class="feature-card">
+									<div class="card-icon">
+										<img
+											src="assets/images/features-icon-2.png"
+											width="100"
+											height="80"
+											loading="lazy"
+											alt="icon"
+										/>
+									</div>
+
+									<h3 class="title-2 card-title">Fresh Environment</h3>
+
+									<p class="label-1 card-text">
+										Step into our vibrant space, where the air is as fresh as our ingredients, inviting you to savor each moment with a zest for life.									</p>
+								</div>
+							</li>
+
+							<li class="feature-item">
+								<div class="feature-card">
+									<div class="card-icon">
+										<img
+											src="assets/images/features-icon-3.png"
+											width="100"
+											height="80"
+											loading="lazy"
+											alt="icon"
+										/>
+									</div>
+
+									<h3 class="title-2 card-title">Skilled Chefs</h3>
+
+									<p class="label-1 card-text">
+										Meet our culinary maestros, orchestrating flavors with precision and passion, transforming ingredients into masterpieces with every flick of the wrist.									</p>
+								</div>
+							</li>
+
+							<li class="feature-item">
+								<div class="feature-card">
+									<div class="card-icon">
+										<img
+											src="assets/images/features-icon-4.png"
+											width="100"
+											height="80"
+											loading="lazy"
+											alt="icon"
+										/>
+									</div>
+
+									<h3 class="title-2 card-title">Event & Party</h3>
+
+									<p class="label-1 card-text">
+										Let us elevate your celebrations to unforgettable heights, where every event becomes a symphony of laughter, joy, and Italian-inspired indulgence.
+									</p>
+								</div>
+							</li>
+						</ul>
+
+						<img
+							src="assets/images/shape-7.png"
+							width="208"
+							height="178"
+							loading="lazy"
+							alt="shape"
+							class="shape shape-1"
+						/>
+
+						<img
+							src="assets/images/shape-8.png"
+							width="120"
+							height="115"
+							loading="lazy"
+							alt="shape"
+							class="shape shape-2"
+						/>
+					</div>
+				</section>
+
+</article>
+		</main>
+
+		<!-- 
+    - #FOOTER
+  -->
+
+		<footer
+			class="footer section has-bg-image text-center"
+			style="background-image: url('assets/images/footer-bg.jpg' %}')"
+		>
+			<div class="container">
+				<div class="footer-top grid-list">
+					<div class="footer-brand has-before has-after">
+						<a href="#" class="logo">
+							<img
+								src="assets/images/logo.png"
+								width="160"
+								height="50"
+								loading="lazy"
+								alt="Stone on fire home"
+							/>
+						</a>
+
+						<address class="body-4">
+							472 bridge road, Richmond, Melbourne 23173, Australia
+						</address>
+
+						<a
+							href="mailto:stoneonfire2024@gmail.com"
+							class="body-4 contact-link"
+							>stoneonfire2024@gmail.com</a
+						>
+
+						<a href="tel:+61469226657" class="body-4 contact-link"
+							>Booking Request : +61469226657</a
+						>
+						<p class="body-4"><strong>Breakfast/Lunch</strong></p>
+						<p class="body-4">Weekday : 07:30 am - 02:30 pm</p>
+						<p class="body-4">Weekends : 08:00 am - 03:00 pm</p>
+						<p class="body-4"><strong>Dinner</strong></p>
+						<p class="body-4">Weekday : 05:00 pm - 09:00 pm</p>
+						<p class="body-4">Weekends : 05:00 pm - 09:30 pm</p>
+
+						<div class="wrapper">
+							<div class="separator"></div>
+							<div class="separator"></div>
+							<div class="separator"></div>
+						</div>
+
+					</div>
+
+					<ul class="footer-list">
+						<li>
+							<a href="#" class="label-2 footer-link hover-underline">Home</a>
+						</li>
+
+						<li>
+							<a href="#" class="label-2 footer-link hover-underline">Menus</a>
+						</li>
+
+						<li>
+							<a href="#" class="label-2 footer-link hover-underline"
+								>About Us</a
+							>
+						</li>
+
+						<li>
+							<a href="#" class="label-2 footer-link hover-underline"
+								>Our Chefs</a
+							>
+						</li>
+
+						<li>
+							<a href="#" class="label-2 footer-link hover-underline"
+								>Contact</a
+							>
+						</li>
+					</ul>
+
+					<ul class="footer-list">
+						<li>
+							<a
+								href="https://www.facebook.com/profile.php?id=61557589155256"
+								class="label-2 footer-link hover-underline"
+								>Facebook</a
+							>
+						</li>
+
+						<li>
+							<a
+								href="https://www.instagram.com/stoneonfire_2024/"
+								class="label-2 footer-link hover-underline"
+								>Instagram</a
+							>
+						</li>
+
+						<li>
+							<a
+								href="https://www.tiktok.com/@stone_on_fire_2024?_t=8l9wGg6qCp8&_r=1"
+								class="label-2 footer-link hover-underline"
+								>Tiktok</a
+							>
+						</li>
+
+
+						<li>
+							<a href="https://maps.app.goo.gl/NvKdmSs3Y28ydo7x6" class="label-2 footer-link hover-underline"
+								>Google Map</a
+							>
+						</li>
+					</ul>
+				</div>
+
+				<div class="footer-bottom">
+					<p class="copyright">
+						&copy; 2024 ET Melbourne. All Rights Reserved | Crafted by
+						<a
+							href="https://github.com/SujanSharma07"
+							target="_blank"
+							class="link"
+							>Sujan</a
+						>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- 
+    - #BACK TO TOP
+  -->
+
+		<a
+			href="#top"
+			class="back-top-btn active"
+			aria-label="back to top"
+			data-back-top-btn
+		>
+			<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+		</a>
+
+		<!-- 
+    - custom js link
+  -->
+		<script src="assets/js/script.js"></script>
+
+		<!-- 
+    - ionicon link
+  -->
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+
+		<script
+			nomodule
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+		></script>
+
+		<!-- Add this script in your HTML template -->
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const reservationForm = document.getElementById("reservation_form");
+			
+				reservationForm.addEventListener("submit", function (event) {
+					event.preventDefault();
+			
+					// Remove any existing error messages
+					const existingErrorMessages = document.querySelectorAll('.error-message');
+					existingErrorMessages.forEach((errorMessage) => {
+						errorMessage.parentNode.removeChild(errorMessage);
+					});
+			
+					// Serialize form data
+					const formData = new FormData(reservationForm);
+			
+					// Send form data to the Django backend using fetch
+					fetch("/reservation/", {
+						method: "POST",
+						body: formData,
+					})
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then((data) => {
+						if (data.status === "error" && data.errors) {
+							// Handle error messages
+							Object.keys(data.errors).forEach((fieldName) => {
+								const field = document.querySelector(`[name="${fieldName}"]`);
+								if (field) {
+									const errorContainer = document.createElement('div');
+									errorContainer.classList.add('error-message');
+									errorContainer.textContent = data.errors[fieldName][0]; // Display the first error message only
+									
+									// Insert error message above the field
+									field.parentNode.insertBefore(errorContainer, field);
+								}
+							});
+						} else if (data.status === "success") {
+							// Handle success message
+							iziToast.success({
+								title: 'Success!',
+								message: 'Your reservation has been successfully submitted.',
+								position: 'topRight'
+							});
+						}
+						console.log(data); // Log data to console for debugging
+					})
+					.catch((error) => {
+						iziToast.error({
+							title: 'Error!',
+							message: 'Network response was not ok',
+							position: 'topRight'
+						});
+						console.error("Error:", error);
+					});
+				});
+			});
+			
+			
+
+			// Ajax code to provide available time dynamically
+
+			$(document).ready(function () {
+				$("#reservation_date").change(function () {
+					var selectedDate = $(this).val();
+					// Make an AJAX request to fetch available times for the selected date
+					$.ajax({
+						url: "/reservations/available_times/", // Replace with your URL pattern
+						data: { date: selectedDate },
+						dataType: "json",
+						success: function (data) {
+							$("#reservation_time").empty(); // Clear existing options
+							$("#reservation_time").append(
+								"<option value=''>--- Select Time ---</option>"
+							);
+							for (var i = 0; i < data.length; i++) {
+								$("#reservation_time").append(
+									"<option value='" + data[i] + "'>" + data[i] + "</option>"
+								);
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.error(
+								"Error fetching available times:",
+								textStatus,
+								errorThrown
+							);
+						},
+					});
+				});
+			});
+		</script>
+
+<script>
+    // Get the modal and button elements
+    var modal = document.getElementById("pdfModal");
+    var btns = document.querySelectorAll(".openPdfBtn");
+    var span = document.getElementsByClassName("close")[0];
+    
+    // Function to open the modal
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+    
+    // Attach click event listener to each button
+    btns.forEach(function(btn) {
+        btn.onclick = openModal;
+    });
+    
+    // Close modal when clicking on <span> (x)
+    span.onclick = closeModal;
+    
+    // Optional: Close modal when clicking outside (for a true popup effect)
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+</script>
+
+
+	</body>
+</html>
