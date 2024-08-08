@@ -993,17 +993,19 @@ mayonnaise.
 
 
 									<!-- Modal -->
-									<div id="pdfModal" class="modal" style="display:nonea">
+									<div id="pdfModal" class="modal" style="display:none">
 										<div class="modal-content">
 											<button class="close" id="closePdfBtn">&times;</button>
 											<iframe
 												id="pdfIframe"
-												src="assets/full-menu.pdf"
+												src=""
+												data-src="assets/full-menu.pdf"
 												width="100%"
 												height="100%"
 											></iframe>
 										</div>
 									</div>
+									
 			<!-- Button to trigger the modal -->
 			<button class="btn btn-primary openPdfBtn" id="openPdfBtn">
 				<span class="text text-1">View All Menu</span>
@@ -1683,37 +1685,54 @@ mayonnaise.
 		></script>
 
 
-<script>
-    // Get the modal and button elements
-    var modal = document.getElementById("pdfModal");
-    var btns = document.querySelectorAll(".openPdfBtn");
-    var span = document.getElementsByClassName("close")[0];
-    
-    // Function to open the modal
-    function openModal() {
-        modal.style.display = "block";
-    }
-
-    // Function to close the modal
-    function closeModal() {
-        modal.style.display = "none";
-    }
-    
-    // Attach click event listener to each button
-    btns.forEach(function(btn) {
-        btn.onclick = openModal;
-    });
-    
-    // Close modal when clicking on <span> (x)
-    span.onclick = closeModal;
-    
-    // Optional: Close modal when clicking outside (for a true popup effect)
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
-    }
-</script>
+		<script>
+			// Get the modal and button elements
+			var modal = document.getElementById("pdfModal");
+			var btns = document.querySelectorAll(".openPdfBtn");
+			var closeBtn = document.getElementById("closePdfBtn");
+			var pdfIframe = document.getElementById("pdfIframe");
+		
+			// Function to open the modal
+			function openModal() {
+				var pdfSrc = pdfIframe.getAttribute('data-src');
+				if (pdfSrc) {
+					pdfIframe.src = pdfSrc;
+				}
+				modal.style.display = "block";
+			}
+		
+			// Function to close the modal
+			function closeModal() {
+				modal.style.display = "none";
+				pdfIframe.src = ""; // Clear the src to stop loading the PDF
+			}
+			
+			// Attach click event listener to each button
+			btns.forEach(function(btn) {
+				btn.onclick = openModal;
+			});
+			
+			// Close modal when clicking on close button
+			closeBtn.onclick = closeModal;
+			
+			// Optional: Close modal when clicking outside the modal content
+			window.onclick = function(event) {
+				if (event.target === modal) {
+					closeModal();
+				}
+			}
+		
+			// Preload the PDF in the background (optional)
+			document.addEventListener("DOMContentLoaded", function() {
+				var link = document.createElement('link');
+				link.rel = 'preload';
+				link.href = pdfIframe.getAttribute('data-src');
+				link.as = 'document';
+				document.head.appendChild(link);
+			});
+		</script>
+		
+		
 <script>
     // Get today's date in YYYY-MM-DD format
     const today = new Date().toISOString().split('T')[0];
