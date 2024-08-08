@@ -1686,19 +1686,31 @@ mayonnaise.
 
 
 		<script>
+			// Check if the device is mobile
+			function isMobileDevice() {
+				return /Mobi|Android/i.test(navigator.userAgent);
+			}
+		
 			// Get the modal and button elements
 			var modal = document.getElementById("pdfModal");
 			var btns = document.querySelectorAll(".openPdfBtn");
 			var closeBtn = document.getElementById("closePdfBtn");
 			var pdfIframe = document.getElementById("pdfIframe");
+			var pdfSrc = pdfIframe.getAttribute('data-src');
 		
 			// Function to open the modal
 			function openModal() {
-				var pdfSrc = pdfIframe.getAttribute('data-src');
-				if (pdfSrc) {
+				if (isMobileDevice()) {
+					// Open PDF in new tab/window on mobile devices
+					console.log("Mobile");
+					window.open(pdfSrc, '_blank');
+				} else {
+					// Open PDF in modal on non-mobile devices
+					console.log("Web");
+
 					pdfIframe.src = pdfSrc;
+					modal.style.display = "block";
 				}
-				modal.style.display = "block";
 			}
 		
 			// Function to close the modal
@@ -1726,7 +1738,7 @@ mayonnaise.
 			document.addEventListener("DOMContentLoaded", function() {
 				var link = document.createElement('link');
 				link.rel = 'preload';
-				link.href = pdfIframe.getAttribute('data-src');
+				link.href = pdfSrc;
 				link.as = 'document';
 				document.head.appendChild(link);
 			});
