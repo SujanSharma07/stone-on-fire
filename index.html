@@ -280,7 +280,7 @@
 						</li>
 
 						<li class="navbar-item">
-							<a href="#reservation" class="navbar-link hover-underline">
+							<a href="#contactus" class="navbar-link hover-underline">
 								<div class="separator"></div>
 
 								<span class="span">Contact</span>
@@ -317,7 +317,7 @@
 					</div>
 				</nav>
 
-				<a href="#reservation_form" class="btn btn-secondary">
+				<a href="#reservation" class="btn btn-secondary">
 					<span class="text text-1">Find A Table</span>
 
 					<span class="text text-2" aria-hidden="true">Find A Table</span>
@@ -1057,15 +1057,12 @@ mayonnaise.
 				<!-- 
         - #RESERVATION
       -->
-
-				<section class="reservation" id="reservation">
+				<section class="reservation">
 					<div class="container">
-						<div class="form reservation-form bg-black-10">
+						<div class="form reservation-form bg-black-10" id="contactus">
 							<form id="reservation_form" class="form-left" target="_blank" action="https://formspree.io/f/xvgpgkzk" method="POST">
-								<h2 class="headline-1 text-center">Online Reservation</h2>
-								<p class="form-text text-center">
-									Booking request <a href="tel:+61398758248" class="link">+61398758248</a> or fill out the order form
-								</p>
+								<h2 class="headline-1 text-center">Suggestions or Enquiry</h2>
+
 								<div class="input-wrapper">
 									<input
 										type="text"
@@ -1077,86 +1074,23 @@ mayonnaise.
 									/>
 									<input
 										type="text"
-										name="Phone Number"
-										placeholder="Phone Number"
+										name="Contact Details"
+										placeholder="Contact Details"
 										autocomplete="off"
 										required
 										class="input-field"
 									/>
 								</div>
-								<div class="input-wrapper">
-									<div class="icon-wrapper">
-										<ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-										<select name="Number of People" class="input-field">
-											<option value="1">1 Person</option>
-											<option value="2">2 Person</option>
-											<option value="3">3 Person</option>
-											<option value="4">4 Person</option>
-											<option value="5">5 Person</option>
-											<option value="6">6 Person</option>
-											<option value="7">7 Person</option>
-											<option value="8">7 +</option>
-										</select>
-										<ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-									</div>
-									<div class="icon-wrapper">
-										<ion-icon name="calendar-clear-outline" aria-hidden="true"></ion-icon>
-										<input
-											type="date"
-											required
-											id="reservation_date"
-											name="Date"
-											class="input-field"
-										/>
-										<ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-									</div>
-									<div class="icon-wrapper">
-										<ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-										<select
-										name="Time Slot"
-										class="input-field"
-										id="reservation_time"
-										required
-									>
-										<option value="">--- Select Time ---</option>
-										<!-- Morning to Afternoon slots -->
-										<option value="07:30AM">07:30 AM</option>
-										<option value="08:00AM">08:00 AM</option>
-										<option value="08:30AM">08:30 AM</option>
-										<option value="09:00AM">09:00 AM</option>
-										<option value="09:30AM">09:30 AM</option>
-										<option value="10:00AM">10:00 AM</option>
-										<option value="10:30AM">10:30 AM</option>
-										<option value="11:00AM">11:00 AM</option>
-										<option value="11:30AM">11:30 AM</option>
-										<option value="12:00PM">12:00 PM</option>
-										<option value="12:30PM">12:30 PM</option>
-										<option value="01:00PM">01:00 PM</option>
-										<option value="01:30PM">01:30 PM</option>
-										<option value="02:00PM">02:00 PM</option>
-										<!-- Evening slots -->
-										<option value="05:00PM">05:00 PM</option>
-										<option value="05:30PM">05:30 PM</option>
-										<option value="06:00PM">06:00 PM</option>
-										<option value="06:30PM">06:30 PM</option>
-										<option value="07:00PM">07:00 PM</option>
-										<option value="07:30PM">07:30 PM</option>
-										<option value="08:00PM">08:00 PM</option>
-										<option value="08:30PM">08:30 PM</option>
-										<option value="09:00PM">09:00 PM</option>
-									</select>
-										<ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
-									</div>
-								</div>
+
 								<textarea
-									name="Message from Customer"
-									placeholder="Message"
+									name="Details from Customer"
+									placeholder="Event Details or Suggestions"
 									autocomplete="off"
 									class="input-field"
 								></textarea>
 								<button type="submit" class="btn btn-secondary">
-									<span class="text text-1">Book A Table</span>
-									<span class="text text-2" aria-hidden="true">Book A Table</span>
+									<span class="text text-1">Enquiry</span>
+									<span class="text text-2" aria-hidden="true">Enquiry</span>
 								</button>
 							</form>
 			
@@ -1170,15 +1104,6 @@ mayonnaise.
 							>
 								<h2 class="headline-1 text-center">Contact Us</h2>
 
-								<p class="contact-label">Booking Request</p>
-
-								<a
-									href="tel:+61398758248"
-									class="body-1 contact-number hover-underline"
-									>+61398758248</a
-								>
-
-								<div class="separator"></div>
 
 								<p class="contact-label">Location</p>
 
@@ -1203,6 +1128,24 @@ mayonnaise.
 							</div>
 						</div>
 					</div>
+					<div
+					class="form-right text-center"
+					id="reservation"
+					style="
+						background-image: url('assets/images/form-pattern.png');
+					"
+				>
+
+					<h2 class="headline-1 text-center">Instant Table Booking</h2>
+					<p class="form-text text-center contact-label">
+						Booking Request <a href="tel:+61398758248" class="link body-1 contact-number hover-underline">+61398758248</a> or fill out the form
+					</p>
+										<iframe 
+						src="https://www.quandoo.com.au/en/checkout-widget/widget?merchantId=104600&primaryColor=2261a5&theme=brand&aid=146&utm_source=quandoo-partner&utm_medium=widget-link"
+						style="width: 100%; height: 600px; border: none;"
+						title="Online Booking"
+					></iframe>
+				</div>
 				</section>
 
 				<!-- 
@@ -1578,11 +1521,11 @@ mayonnaise.
 						</li>
 
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline">Menus</a>
+							<a href="#menu" class="label-2 footer-link hover-underline">Menus</a>
 						</li>
 
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline"
+							<a href="#aboutus" class="label-2 footer-link hover-underline"
 								>About Us</a
 							>
 						</li>
@@ -1594,7 +1537,7 @@ mayonnaise.
 						</li>
 
 						<li>
-							<a href="#" class="label-2 footer-link hover-underline"
+							<a href="#contactus" class="label-2 footer-link hover-underline"
 								>Contact</a
 							>
 						</li>
