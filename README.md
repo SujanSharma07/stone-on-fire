@@ -6,6 +6,7 @@ And customers can make booking and can check what restaurant / Cafe has to offer
 
 ### Build and Start the project
 
+
 ```
 docker-compose build
 docker-compose run app makemigrations
